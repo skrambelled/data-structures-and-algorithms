@@ -1,6 +1,6 @@
 # Insertion Sorting
 
-When all your elements in a list are in order its much faster to search through these elements. and perform other useful operations. But we dont always get a nice sorted list. In that case we need to iterate through the list and sort those elements! There are many strategies for sorting, today we'll go over one of the simpler and more intuitive ones, which we call *insertion sorting*.
+When all your elements in a list are in order it's much faster to search through these elements and perform other useful operations. But we don't always get a nice sorted list. In that case we need to iterate through the list and sort those elements! There are many strategies for sorting, today we'll go over one of the simpler and more intuitive ones, which we call *insertion sorting*.
 
 Let's say you get an unsorted list:
 
@@ -8,7 +8,7 @@ Let's say you get an unsorted list:
 [5, 2, 7, 4, 1]
 ```
 
-The idea here is that we'll divide our list into two sub-lists. The lefthand portion represents the sorted portion of the list, and the righthand portion represents the sorted portion.
+The idea here is that we'll divide our list into two sub-lists. The left-hand portion represents the sorted portion of the list, and the right-hand portion represents the sorted portion.
 
 We'll start our divider just after the first element, because we can always assume that a list containing only one element is sorted. I'll illustrate this using a pipe character to divide the two sides.
 
@@ -16,7 +16,7 @@ We'll start our divider just after the first element, because we can always assu
 5 | 2 7 4 1
 ```
 
-As we traverse the righthand unsorted side of the list, we'll grab each element and compare it to each element on the sorted side, but move **backwards**. In this case we can grab the 2, and compare it to the sorted 5, see that the 2 is smaller and move on. We then reach the end of the list and know we are in the correct position because there are not more elements to compare to.
+As we traverse the right-hand unsorted side of the list, we'll grab each element and compare it to each element on the sorted side, but move **backwards**. In this case we can grab the 2, and compare it to the sorted 5, see that the 2 is smaller and move on. We then reach the end of the list and know we are in the correct position because there are not more elements to compare to.
 
 ```python
 2 5 | 7 4 1
