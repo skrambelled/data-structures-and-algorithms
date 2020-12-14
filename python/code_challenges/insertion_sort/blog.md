@@ -72,7 +72,7 @@ def insertion_sort(the_list):
             the_list[sorted_iterator+1] = the_list[sorted_iterator]
             sorted_iterator -= 1
 
-        # we've reached the correct location, time for insrtion!
+        # we've reached the correct location, time for insertion!
         the_list[sorted_iterator + 1] = elem
 
         # now that we've inserted, move on to the next unsorted element
