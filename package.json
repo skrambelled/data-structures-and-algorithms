@@ -1,0 +1,31 @@
+{
+  "name": "data-structures-and-algorithms",
+  "version": "1.0.0",
+  "description": "Data Structures, Algorithms, Code Challenges",
+  "main": "index.js",
+  "scripts": {
+    "get-challenge": "`which bash` ./code-challenges/bin/get-challenge.sh",
+    "test": "jest --verbose --coverage",
+    "lint": "eslint '**/*.js'"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "eslint": "^7.2.0",
+    "express": "^4.17.1",
+    "jest": "^26.0.1",
+    "mustache": "^4.0.1",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skrambelled/data-structures-and-algorithms.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/skrambelled/data-structures-and-algorithms/issues"
+  },
+  "homepage": "https://github.com/skrambelled/data-structures-and-algorithms#readme"
+}
