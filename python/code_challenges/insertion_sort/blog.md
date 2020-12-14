@@ -77,5 +77,4 @@ def insertion_sort(the_list):
 
         # now that we've inserted, move on to the next unsorted element
         i += 1
-
 ```
