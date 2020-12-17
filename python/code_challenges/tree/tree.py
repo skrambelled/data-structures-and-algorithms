@@ -1,5 +1,5 @@
 import random
-from code_challenges.stacks_and_queues.stacks_and_queues import Queue
+from code_challenges.stacks_and_queues.stacks_and_queues import Stack, Queue
 
 
 class Node:
@@ -69,6 +69,40 @@ class BinaryTree(Tree):
                 q.enqueue(current.right)
             output.append(current.value)
         return output
+
+    def highest_weight(self):
+        if not self.root:
+            raise Exception('tree is empty')
+
+        heaviest_leaf = None
+        heaviest_weight = None
+
+        def walk(root, stack):
+
+            # record holders for heaviest leaf, and corresponding weight
+            nonlocal heaviest_leaf
+            nonlocal heaviest_weight
+
+            if not stack:
+                stack = Stack()
+
+            if root.left:
+                left = self.walk(root.left, stack)
+            if root.right:
+                right = self.walk(root.right, stack)
+
+            # are we at a leaf node (a node with no children)?
+            if not root.left and not root.right:
+                # if we've not encountered any leaf yet, or our current leaf
+                # is the new heaviest leaf, lets set our record holders
+                if heaviest_weight is None or (root.value + left + right > heaviest_weight):
+                    heaviest_leaf = root
+                    heaviest_weight = root.value + left + right
+                    stack.push(root)
+                else:
+                    stack.pop()
+
+        return (heaviest_leaf, heaviest_weight)
 
 
 class BinarySearchTree(BinaryTree):
