@@ -54,6 +54,35 @@ class BinaryTree(Tree):
 
         return walk(self.root)
 
+    def _get_values(self, root, flag="in-order"):
+        values = []
+
+        def walk(root, flag):
+            if not root:
+                return
+
+            if(flag == 'pre-order'):
+                values.append(root.value)
+            walk(root.left, flag)
+            if(flag == 'in-order'):
+                values .append(root.value)
+            walk(root.right, flag)
+            if(flag == 'post-order'):
+                values.append(root.value)
+            return values
+
+        walk(self.root, flag)
+        return values
+
+    def pre_order(self):
+        return self._get_values(self.root, flag='pre-order')
+
+    def in_order(self):
+        return self._get_values(self.root, flag='in-order')
+
+    def post_order(self):
+        return self._get_values(self.root, flag='post-order')
+
     def breadth_traverse(self):
         if not self.root:
             raise Exception('tree is empty')
@@ -140,31 +169,22 @@ class BinarySearchTree(BinaryTree):
 
         return walk(self.root)
 
-    def _get_values(self, root, flag="in-order"):
-        values = []
+    def tree_intersections(self, other_tree):
+        from code_challenges.merge_sort.merge_sort import merge_sort
+        intersections = []
 
-        def walk(root, flag):
+        def walk(root):
             if not root:
                 return
 
-            if(flag == 'pre-order'):
-                values.append(root.value)
-            walk(root.left, flag)
-            if(flag == 'in-order'):
-                values .append(root.value)
-            walk(root.right, flag)
-            if(flag == 'post-order'):
-                values.append(root.value)
-            return values
+            # pre-order traversal, we'll see if the other tree contains value
+            if other_tree.contains(root.value):
+                intersections.append(root.value)
 
-        walk(self.root, flag)
-        return values
+            # now lets recursively walk the left and right children
+            walk(root.left)
+            walk(root.right)
 
-    def pre_order(self):
-        return self._get_values(self.root, 'pre-order')
-
-    def in_order(self):
-        return self._get_values(self.root, 'in-order')
-
-    def post_order(self):
-        return self._get_values(self.root, 'post-order')
+        walk(self.root)
+        merge_sort(intersections)
+        return intersections

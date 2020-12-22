@@ -34,9 +34,12 @@ Method | Big O | What it does
 `pre_order()` | O(n) | returns a list of values with pre-order sorting
 `in_order()` | O(n) | returns a list of values with in-order sorting
 `post_order()` | O(n) | returns a list of values in post-order sorting
+`tree_intersections(tree)` | O(nlog(n)) | returns a list of values that both the tree, and the other share
 
 ## Whiteboard
 
-![whiteboard](binary_tree.png)
+![binary_tree](binary_tree.png)
+
+![tree_intersections](binary_search_tree_intersections.png)
 
 [<-- Back](../README.md)
