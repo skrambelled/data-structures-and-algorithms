@@ -1,4 +1,5 @@
 from code_challenges.hashtable.hashtable import Hashtable
+import pytest
 
 
 # tests from JB
@@ -54,3 +55,104 @@ def test_get_silent_and_listen():
 
     assert hashtable.get('listen') == 'to me'
     assert hashtable.get('silent') == 'so quiet'
+
+
+#########################
+# testing join() method #
+#########################
+
+
+def test_contains():
+    hashtable = Hashtable()
+    hashtable.set('one', '1')
+
+    actual = hashtable.contains('one')
+    expect = True
+
+    assert actual == expect
+
+
+def test_not_contains():
+    hashtable = Hashtable()
+    hashtable.set('one', '1')
+
+    actual = hashtable.contains('two')
+    expect = False
+
+    assert actual == expect
+
+
+def test_get_hashes_length():
+    hashtable = Hashtable()
+    hashtable.set('one', '1')
+    hashtable.set('two', '2')
+
+    actual = len(hashtable.get_hashes())
+    expect = 2
+
+    assert actual == expect
+
+
+def test_join_left_with_empty_right():
+    left = Hashtable()
+    right = Hashtable()
+
+    left.set('fond', 'enamored')
+
+    actual = left.join(right)
+    expect = [['fond', 'enamored', None]]
+
+    assert actual == expect
+
+
+def test_right_join_with_empty_right():
+    left = Hashtable()
+    right = Hashtable()
+
+    left.set('fond', 'enamored')
+
+    actual = left.join(right, right_join=True)
+    expect = []
+
+    assert actual == expect
+
+
+def test_left_join_with_antonym_right():
+    left = Hashtable()
+    right = Hashtable()
+
+    left.set('fond', 'enamored')
+    right.set('fond', 'averse')
+
+    actual = left.join(right)
+    expect = [['fond', 'enamored', 'averse']]
+
+    assert actual == expect
+
+
+def test_left_join_collisions_with_antonym_right():
+    left = Hashtable()
+    right = Hashtable()
+
+    left.set('fond', 'enamored')
+    right.set('fond', 'averse')
+    right.set('donf', 'enamored')
+
+    actual = left.join(right)
+    expect = [['fond', 'enamored', 'averse']]
+
+    assert actual == expect
+
+
+def test_right_join_collisions():
+    left = Hashtable()
+    right = Hashtable()
+
+    left.set('fond', 'enamored')
+    left.set('donf', 'enamored')
+    right.set('fond', 'averse')
+
+    actual = left.join(right, right_join=True)
+    expect = [['fond', 'averse', 'enamored']]
+
+    assert actual == expect
