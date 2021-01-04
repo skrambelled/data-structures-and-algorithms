@@ -30,6 +30,7 @@ def quick_sort(arr, l, r):
         # Sort the r
         QuickSort(arr, position + 1, r)
 
+
 def partition(arr, l, r):
     # set a pivot value as a point of reference
     p = arr[r]
