@@ -1,3 +1,5 @@
+from code_challenges.stacks_and_queues.stacks_and_queues import Queue
+
 class Vertex:
     def __init__(self, value):
         self.value = value
@@ -42,3 +44,24 @@ class Graph:
 
     def size(self):
         return len(self._adjecency_list)
+
+    def breadth_first(self, node):
+        visited = [node]
+
+        q = Queue()
+        q.enqueue(node)
+
+        while not q.is_empty():
+            node = q.dequeue()
+
+            neighbors = [edge.vertex for edge in self.get_neighbors(node)]
+
+            for neighbor in neighbors:
+                if neighbor not in visited:
+                    visited.append(neighbor)
+                    q.enqueue(neighbor)
+
+        return visited
+
+    def connected(self, first, second):
+        return second in self.breadth_first(first)

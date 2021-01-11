@@ -201,49 +201,84 @@ def test_size_two():
 
     assert actual == expected
 
-# #####################################
-# ## Sneek Peek: Test for next Challenge
-# #####################################
 
-# # def test_breadth_first():
+def test_breadth_first():
 
-# #   g = Graph()
+    g = Graph()
 
-# #   pandora = g.add_node("Pandora")
+    pandora = g.add_node("Pandora")
 
-# #   arendelle = g.add_node("Arendelle")
+    arendelle = g.add_node("Arendelle")
 
-# #   metroville = g.add_node("Metroville")
+    metroville = g.add_node("Metroville")
 
-# #   monstropolis = g.add_node("Monstropolis")
+    monstropolis = g.add_node("Monstropolis")
 
-# #   narnia = g.add_node("Narnia")
+    narnia = g.add_node("Narnia")
 
-# #   naboo = g.add_node("Naboo")
+    naboo = g.add_node("Naboo")
 
-# #   g.add_edge(pandora, arendelle)
-# #   g.add_edge(arendelle, pandora)
+    g.add_edge(pandora, arendelle)
+    g.add_edge(arendelle, pandora)
 
-# #   g.add_edge(arendelle, metroville)
-# #   g.add_edge(metroville, arendelle)
+    g.add_edge(arendelle, metroville)
+    g.add_edge(metroville, arendelle)
 
-# #   g.add_edge(arendelle, monstropolis)
-# #   g.add_edge(monstropolis, arendelle)
+    g.add_edge(arendelle, monstropolis)
+    g.add_edge(monstropolis, arendelle)
 
-# #   g.add_edge(metroville, monstropolis)
-# #   g.add_edge(monstropolis, metroville)
+    g.add_edge(metroville, monstropolis)
+    g.add_edge(monstropolis, metroville)
 
-# #   g.add_edge(metroville, narnia)
-# #   g.add_edge(narnia, metroville)
+    g.add_edge(metroville, narnia)
+    g.add_edge(narnia, metroville)
 
-# #   g.add_edge(metroville, naboo)
-# #   g.add_edge(naboo, metroville)
+    g.add_edge(metroville, naboo)
+    g.add_edge(naboo, metroville)
 
-# #   g.add_edge(narnia, naboo)
-# #   g.add_edge(naboo, narnia)
+    g.add_edge(narnia, naboo)
+    g.add_edge(naboo, narnia)
 
-# #   values = []
+    # stretch make more flexible vs. always returning list of vertices
 
-# #   g.breadth_first(pandora, lambda v: values.append(v.value))
+    vertices = g.breadth_first(pandora)
 
-# #   assert values == ["Pandora", "Arendelle", "Metroville", "Monstropolis", "Narnia", "Naboo"]
+    # convert vertices into values for easier testing
+    values = [vertex.value for vertex in vertices]
+
+    assert values == ["Pandora", "Arendelle", "Metroville", "Monstropolis", "Narnia", "Naboo"]
+
+
+def test_connected():
+    g = Graph()
+
+    pandora = g.add_node("Pandora")
+    arendelle = g.add_node("Arendelle")
+
+    g.add_edge(pandora, arendelle)
+    g.add_edge(arendelle, pandora)
+
+    assert g.connected(pandora, arendelle) is True
+    assert g.connected(arendelle, pandora) is True
+
+
+def test_not_connected():
+    g = Graph()
+
+    pandora = g.add_node("Pandora")
+    arendelle = g.add_node("Arendelle")
+
+    assert g.connected(pandora, arendelle) is False
+    assert g.connected(arendelle, pandora) is False
+
+
+def test_one_way_connected():
+    g = Graph()
+
+    pandora = g.add_node("Pandora")
+    arendelle = g.add_node("Arendelle")
+
+    g.add_edge(pandora, arendelle)
+
+    assert g.connected(pandora, arendelle) is True
+    assert g.connected(arendelle, pandora) is False

@@ -13,3 +13,7 @@ Graphs are a datastructure comprised of nodes that at interconnect in a network.
 `get_neightbords(vertex)` - returns a list of all the neigbords of a given node/vertex
 
 `size()` - retuns the number of nodes
+
+`breadth_first(vertex)` - perform a breadth first traversal, starting at the supplied vertex, and return all the connected vertices
+
+`connected(first, second)` - test to see if the first vertex is connect to the second vertex
