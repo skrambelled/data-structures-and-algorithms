@@ -282,3 +282,79 @@ def test_one_way_connected():
 
     assert g.connected(pandora, arendelle) is True
     assert g.connected(arendelle, pandora) is False
+
+
+def test_fixture(flights_fixture):
+    flights = flights_fixture
+
+    pandora = flights.get_node("Pandora")
+    metroville = flights.get_node("Metroville")
+
+    assert flights.connected(pandora, metroville) is True
+    assert flights.connected(metroville, pandora) is True
+
+
+def test_add_edge_between_two(flights_fixture):
+    pandora = flights_fixture.get_node("Pandora")
+    metroville = flights_fixture.get_node("Metroville")
+
+    actual = flights_fixture.get_edges([pandora, metroville])
+    expect = True, 82
+
+    assert actual == expect
+
+
+def test_add_edge_between_three(flights_fixture):
+    arendelle = flights_fixture.get_node("Arendelle")
+    monstropolis = flights_fixture.get_node("Monstropolis")
+    naboo = flights_fixture.get_node("Naboo")
+
+    actual = flights_fixture.get_edges([arendelle, monstropolis, naboo])
+    expect = True, 115
+
+    assert actual == expect
+
+
+def test_add_edge_between_two_disconnected(flights_fixture):
+    naboo = flights_fixture.get_node("Naboo")
+    pandora = flights_fixture.get_node("Pandora")
+
+    actual = flights_fixture.get_edges([naboo, pandora])
+    expect = False, 0
+
+    assert actual == expect
+
+
+
+@pytest.fixture
+def flights_fixture():
+    flights = Graph()
+
+    pandora      = flights.add_node("Pandora")
+    arendelle    = flights.add_node("Arendelle")
+    metroville   = flights.add_node("Metroville")
+    narnia       = flights.add_node("Narnia")
+    naboo        = flights.add_node("Naboo")
+    monstropolis = flights.add_node("Monstropolis")
+
+    flights.add_edge(pandora, arendelle, 150)
+    flights.add_edge(pandora, metroville, 82)
+    flights.add_edge(arendelle, metroville, 99)
+    flights.add_edge(arendelle, monstropolis, 42)
+    flights.add_edge(metroville, narnia, 37)
+    flights.add_edge(metroville, naboo, 26)
+    flights.add_edge(metroville, monstropolis, 105)
+    flights.add_edge(monstropolis, naboo, 73)
+    flights.add_edge(narnia, naboo, 250)
+
+    flights.add_edge(arendelle, pandora, 150)
+    flights.add_edge(metroville, pandora, 82)
+    flights.add_edge(metroville, arendelle, 99)
+    flights.add_edge(monstropolis, arendelle, 42)
+    flights.add_edge(narnia, metroville, 37)
+    flights.add_edge(naboo, metroville, 26)
+    flights.add_edge(monstropolis, metroville, 105)
+    flights.add_edge(naboo, monstropolis, 73)
+    flights.add_edge(naboo, narnia, 250)
+
+    return flights
