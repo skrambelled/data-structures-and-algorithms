@@ -325,7 +325,6 @@ def test_add_edge_between_two_disconnected(flights_fixture):
     assert actual == expect
 
 
-
 @pytest.fixture
 def flights_fixture():
     flights = Graph()

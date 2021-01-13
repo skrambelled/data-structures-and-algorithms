@@ -74,7 +74,6 @@ class Graph:
     def connected(self, first, second):
         return second in self.breadth_first(first)
 
-
     def get_edges(self, vertices):
         total = 0
         for i, vertex in enumerate(vertices):
