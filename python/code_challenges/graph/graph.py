@@ -71,6 +71,21 @@ class Graph:
 
         return visited
 
+    def depth_first(self, node):
+        visited = []
+
+        def walk(root):
+            if root in visited:
+                return
+
+            visited.append(root)
+
+            for vertex in [edge.vertex for edge in self.get_neighbors(root)]:
+                walk(vertex)
+
+        walk(node)
+        return [vertex.value for vertex in visited]
+
     def connected(self, first, second):
         return second in self.breadth_first(first)
 
@@ -87,6 +102,3 @@ class Graph:
                 if not had_edge:
                     return False, 0
         return True, total
-
-
-
